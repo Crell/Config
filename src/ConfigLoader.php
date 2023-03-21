@@ -24,18 +24,18 @@ readonly class ConfigLoader
      */
     public function load(string $class): object
     {
-        $id = $this->deriveID($class);
+        $id = $this->deriveId($class);
 
         $layers = [];
-        foreach ($this->sources as $source) {
+        // Go through the sources in reverse order to account for the += behavior below.
+        foreach (array_reverse($this->sources) as $source) {
             $layers[] = $source->load($id);
         }
 
         $data = [];
         foreach ($layers as $layer) {
-            foreach ($layer as $k => $v) {
-                $data[$k] = $v;
-            }
+            // This makes the first layer with a value win.
+            $data += $layer;
         }
 
         $config = $this->serde->deserialize($data, from: 'array', to: $class);

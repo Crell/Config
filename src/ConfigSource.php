@@ -6,5 +6,8 @@ namespace Crell\Config;
 
 interface ConfigSource
 {
+    /**
+     * @return array<mixed, mixed>
+     */
     public function load(string $id): array;
 }

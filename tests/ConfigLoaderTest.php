@@ -63,4 +63,41 @@ class ConfigLoaderTest extends TestCase
         self::assertEquals('beep', $config->string);
         self::assertEquals(3.14, $config->float);
     }
+
+
+    #[Test]
+    public function loading_from_multiple_overlapping_sources_merge_cleanly(): void
+    {
+        $source1 = new class implements ConfigSource {
+            public function load(string $id): array
+            {
+                return ['int' => 3];
+            }
+        };
+
+        $source2 = new class implements ConfigSource {
+            public function load(string $id): array
+            {
+                return ['string' => 'beep', 'int' => 5, 'float' => 1.2];
+            }
+        };
+
+        $source3 = new class implements ConfigSource {
+            public function load(string $id): array
+            {
+                return ['float' => 3.14];
+            }
+        };
+
+        $loader = new ConfigLoader([$source1, $source2, $source3]);
+
+        $config = $loader->load(Sample::class);
+
+        self::assertInstanceOf(Sample::class, $config);
+        self::assertEquals(5, $config->int);
+        self::assertEquals('beep', $config->string);
+        self::assertEquals(3.14, $config->float);
+    }
+
+
 }
