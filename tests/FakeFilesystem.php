@@ -35,6 +35,11 @@ trait FakeFilesystem
                         int: 5
                         END,
                 ],
+                'json' => [
+                    'crell_config_sample.json'    => <<<END
+                        {"int": 5}
+                        END,
+                ],
             ],
         ];
     }
