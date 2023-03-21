@@ -1,0 +1,36 @@
+{
+    "name": "crell/config",
+    "require": {
+        "php": "~8.2",
+        "crell/fp": "^0.4.0",
+        "crell/serde": "^0.5.0",
+        "crell/attributeutils": "^0.8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0.15",
+        "phpbench/phpbench": "^1.1",
+        "phpstan/phpstan": "^1.0",
+        "vishnubob/wait-for-it": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Crell\\Config\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Crell\\Config\\": "tests",
+            "Crell\\Config\\Benchmarks\\": "benchmarks"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "phpstan": "phpstan",
+        "coverage": "php -dextension=pcov.so -dpcov.enabled=1 -dpcov.directory=src vendor/bin/phpunit --coverage-text",
+        "all-checks": [
+            "phpunit",
+            "phpstan"
+        ],
+        "benchmarks": "vendor/bin/phpbench run benchmarks --report=aggregate"
+    }
+}
