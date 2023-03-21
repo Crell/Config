@@ -11,6 +11,8 @@ readonly class ConfigLoader
 {
     /**
      * @param ConfigSource[] $sources
+     *   A list of sources from which to load values. If a property is defined
+     *   in multiple sources, the later one will take precedence.
      */
     public function __construct(
         private array $sources,

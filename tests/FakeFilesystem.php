@@ -45,6 +45,20 @@ trait FakeFilesystem
                         int = 5
                         END,
                 ],
+
+                // For simulationg multi-environment laoding.
+                'dev' => [
+                    'crell_config_configobjects_sample.yaml'    => <<<END
+                        int: 5
+                        END,
+                ],
+                'base' => [
+                    'crell_config_configobjects_sample.yaml'    => <<<END
+                        string: 'beep'
+                        float: 3.14
+                        int: 3
+                        END,
+                ],
             ],
         ];
     }

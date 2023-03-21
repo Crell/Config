@@ -64,7 +64,6 @@ class ConfigLoaderTest extends TestCase
         self::assertEquals(3.14, $config->float);
     }
 
-
     #[Test]
     public function loading_from_multiple_overlapping_sources_merge_cleanly(): void
     {
@@ -98,6 +97,4 @@ class ConfigLoaderTest extends TestCase
         self::assertEquals('beep', $config->string);
         self::assertEquals(3.14, $config->float);
     }
-
-
 }
