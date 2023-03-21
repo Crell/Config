@@ -40,6 +40,11 @@ trait FakeFilesystem
                         {"int": 5}
                         END,
                 ],
+                'ini' => [
+                    'crell_config_sample.ini'    => <<<END
+                        int = 5
+                        END,
+                ],
             ],
         ];
     }
