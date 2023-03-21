@@ -28,21 +28,16 @@ readonly class ConfigLoader
     {
         $id = $this->deriveId($class);
 
-        $layers = [];
+        // @todo I so want to turn this into a simple pipe...
+
         // Go through the sources in reverse order to account for the += behavior below.
-        foreach (array_reverse($this->sources) as $source) {
-            $layers[] = $source->load($id);
-        }
+        $layers = array_map(fn(ConfigSource $source): array => $source->load($id), array_reverse($this->sources));
 
-        $data = [];
-        foreach ($layers as $layer) {
-            // This makes the first layer with a value win.
-            $data += $layer;
-        }
+        $reducer = static fn(array $data, array $layer) => $data + $layer;
 
-        $config = $this->serde->deserialize($data, from: 'array', to: $class);
+        $data = array_reduce($layers, $reducer, []);
 
-        return $config;
+        return $this->serde->deserialize($data, from: 'array', to: $class);
     }
 
     /**
