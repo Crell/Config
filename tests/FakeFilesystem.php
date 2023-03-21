@@ -30,6 +30,11 @@ trait FakeFilesystem
                         <?php return ['int' => 5];
                         END,
                 ],
+                'yaml' => [
+                    'crell_config_sample.yaml'    => <<<END
+                        int: 5
+                        END,
+                ],
             ],
         ];
     }
