@@ -8,9 +8,6 @@ use Symfony\Component\Yaml\Yaml;
 
 readonly class YamlFileSource implements ConfigSource
 {
-    /**
-     * @param array<string> $formats
-     */
     public function __construct(
         private string $directory,
     ) {}

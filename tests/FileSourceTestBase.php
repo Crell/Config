@@ -30,6 +30,7 @@ abstract class FileSourceTestBase extends TestCase
     #[Test]
     public function missing_file_returns_empty_array(): void
     {
+        /** @var ConfigSource $source */
         $source = new ($this->class)($this->dataDir->url() . '/empty');
 
         $ret = $source->load('crell_config_sample');
@@ -40,6 +41,7 @@ abstract class FileSourceTestBase extends TestCase
     #[Test]
     public function found_file_returns_correct_array(): void
     {
+        /** @var ConfigSource $source */
         $source = new ($this->class)($this->dataDir->url() . '/' . $this->format);
 
         $ret = $source->load('crell_config_sample');

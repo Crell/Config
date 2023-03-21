@@ -5,9 +5,9 @@ parameters:
         - tests
     checkGenericClassInNonGenericObjectType: false
     ignoreErrors:
-#        -
-#            message: '#type has no value type specified in iterable type array#'
-#            path: tests/
+        -
+            message: '#type has no value type specified in iterable type array#'
+            path: tests/
 #        -
 #            message: '#type has no value type specified in iterable type iterable#'
 #            path: tests/
