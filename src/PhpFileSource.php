@@ -13,10 +13,6 @@ readonly class PhpFileSource implements ConfigSource
     public function load(string $id): array
     {
         $filePath = $this->directory . '/' . $id . '.php';
-        if (file_exists($filePath)) {
-            $data = require $filePath;
-        }
-
-        return $data ?? [];
+        return file_exists($filePath) ? require $filePath : [];
     }
 }

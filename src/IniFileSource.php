@@ -13,10 +13,6 @@ readonly class IniFileSource implements ConfigSource
     public function load(string $id): array
     {
         $filePath = $this->directory . '/' . $id . '.ini';
-        if (file_exists($filePath)) {
-            $data = parse_ini_file($filePath);
-        }
-
-        return $data ?? [];
+        return file_exists($filePath) ? parse_ini_file($filePath) : [];
     }
 }

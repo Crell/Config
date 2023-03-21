@@ -14,14 +14,12 @@ readonly class JsonFileSource implements ConfigSource
     {
         $filePath = $this->directory . '/' . $id . '.json';
         try {
-            if (file_exists($filePath)) {
-                $data = json_decode(file_get_contents($filePath) ?: '{}', true, 512, JSON_THROW_ON_ERROR);
-            }
+            return file_exists($filePath)
+                ? json_decode(file_get_contents($filePath) ?: '{}', true, 512, JSON_THROW_ON_ERROR)
+                : [];
         } catch (\JsonException) {
             // @todo Probably some kind of error handling.
             return [];
         }
-
-        return $data ?? [];
     }
 }
