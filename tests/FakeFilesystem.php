@@ -46,7 +46,7 @@ trait FakeFilesystem
                         END,
                 ],
 
-                // For simulationg multi-environment laoding.
+                // For simulationg multi-environment loading.
                 'dev' => [
                     'crell_config_configobjects_sample.yaml'    => <<<END
                         int: 5
