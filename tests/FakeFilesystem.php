@@ -59,6 +59,9 @@ trait FakeFilesystem
                         db:
                             db_port: 2000
                         END,
+                    'myname.yaml' => <<<END
+                        things: bar
+                        END,
                 ],
                 'base' => [
                     'crell_config_configobjects_sample.yaml'    => <<<END
@@ -75,6 +78,9 @@ trait FakeFilesystem
                             db_user: user
                             db_pass: pass
                             db_port: 1000
+                        END,
+                    'myname.yaml' => <<<END
+                        stuff: foo
                         END,
                 ],
             ],

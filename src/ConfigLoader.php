@@ -52,11 +52,19 @@ readonly class ConfigLoader
     }
 
     /**
+     *
+     * This might be syntactically easier with AttributeUtils,
+     * but for just a single class-level attribute it's not worth
+     * the extra CPU cycles.
+     *
      * @param class-string $class
-     * @todo Make this flexible. It's just a stub for now.
      */
     private function deriveId(string $class): string
     {
-        return strtolower(str_replace('\\', '_', $class));
+        $rClass = new \ReflectionClass($class);
+        /** @var Config[] $attribs */
+        $attribs = array_map(static fn(\ReflectionAttribute $a) => $a->newInstance(), $rClass->getAttributes(Config::class, \ReflectionAttribute::IS_INSTANCEOF));
+
+        return $attribs[0]?->key ?? strtolower(str_replace('\\', '_', $class));
     }
 }

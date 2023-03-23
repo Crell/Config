@@ -3,7 +3,7 @@
     "require": {
         "php": "~8.2",
         "crell/fp": "^0.4.0",
-        "crell/serde": "^0.5.0",
+        "crell/serde": "^0.6.0",
         "crell/attributeutils": "^0.8.2"
     },
     "require-dev": {

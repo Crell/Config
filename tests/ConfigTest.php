@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Crell\Config;
 
 use Crell\Config\ConfigObjects\Complex;
+use Crell\Config\ConfigObjects\CustomKey;
 use Crell\Config\ConfigObjects\Sample;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -55,6 +56,21 @@ class ConfigTest extends TestCase
         self::assertEquals('val', $config->sample->string);
         self::assertEquals(2.3, $config->sample->float);
         self::assertEquals('value', $config->anotherString);
+    }
+
+    #[Test]
+    public function custom_keys_are_loaded_successfully(): void
+    {
+        $loader = new ConfigLoader([
+            new YamlFileSource($this->root->getChild('data/base')->url()),
+            new YamlFileSource($this->root->getChild('data/dev')->url()),
+        ]);
+
+        $config = $loader->load(CustomKey::class);
+
+        self::assertInstanceOf(CustomKey::class, $config);
+        self::assertEquals('foo', $config->stuff);
+        self::assertEquals('bar', $config->things);
     }
 
 }
