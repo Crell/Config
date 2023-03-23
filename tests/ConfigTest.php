@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Crell\Config;
 
+use Crell\Config\ConfigObjects\Complex;
 use Crell\Config\ConfigObjects\Sample;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
@@ -34,6 +35,26 @@ class ConfigTest extends TestCase
         self::assertEquals(3.14, $config->float);
     }
 
+    #[Test]
+    public function nested_sources_load_and_mask_top_level_data(): void
+    {
+        $loader = new ConfigLoader([
+            new YamlFileSource($this->root->getChild('data/base')->url()),
+            new YamlFileSource($this->root->getChild('data/dev')->url()),
+        ]);
 
-    // @todo Still need to test more complex objects.
+        $config = $loader->load(Complex::class);
+
+        self::assertInstanceOf(Complex::class, $config);
+        self::assertEquals('name', $config->db->name);
+        self::assertEquals('host', $config->db->host);
+        self::assertEquals('user', $config->db->user);
+        self::assertEquals('pass', $config->db->pass);
+        self::assertEquals(2000, $config->db->port);
+        self::assertEquals(3, $config->sample->int);
+        self::assertEquals('val', $config->sample->string);
+        self::assertEquals(2.3, $config->sample->float);
+        self::assertEquals('value', $config->anotherString);
+    }
+
 }

@@ -51,12 +51,30 @@ trait FakeFilesystem
                     'crell_config_configobjects_sample.yaml'    => <<<END
                         int: 5
                         END,
+                    'crell_config_configobjects_complex.yaml'    => <<<END
+                        sample:
+                            float: 2.3
+                            string: val
+                        anotherString: value
+                        db:
+                            db_port: 2000
+                        END,
                 ],
                 'base' => [
                     'crell_config_configobjects_sample.yaml'    => <<<END
                         string: 'beep'
                         float: 3.14
                         int: 3
+                        END,
+                    'crell_config_configobjects_complex.yaml'    => <<<END
+                        sample:
+                            int: 3
+                        db:
+                            db_name: name
+                            db_host: host
+                            db_user: user
+                            db_pass: pass
+                            db_port: 1000
                         END,
                 ],
             ],

@@ -13,6 +13,8 @@ readonly class ConfigLoader
      * @param ConfigSource[] $sources
      *   A list of sources from which to load values. If a property is defined
      *   in multiple sources, the later one will take precedence.
+     *   Nested values will merge, meaning foo.bar and foo.baz, if defined in
+     *   different layers, will both end up used in the nested foo object.
      */
     public function __construct(
         private array $sources,
@@ -30,14 +32,23 @@ readonly class ConfigLoader
 
         // @todo I so want to turn this into a simple pipe...
 
-        // Go through the sources in reverse order to account for the += behavior below.
-        $layers = array_map(fn(ConfigSource $source): array => $source->load($id), array_reverse($this->sources));
+        $layers = array_map(static fn(ConfigSource $source): array => $source->load($id), $this->sources);
 
-        $reducer = static fn(array $data, array $layer) => $data + $layer;
-
-        $data = array_reduce($layers, $reducer, []);
+        $data = array_reduce($layers, $this->integrateLayer(...), []);
 
         return $this->serde->deserialize($data, from: 'array', to: $class);
+    }
+
+    private function integrateLayer(array $data, array $layer): array
+    {
+        foreach ($layer as $k => $v) {
+            if (isset($data[$k]) && is_array($data[$k])) {
+                $data[$k] = $this->integrateLayer($data[$k], $v);
+            } else {
+                $data[$k] = $v;
+            }
+        }
+        return $data;
     }
 
     /**
