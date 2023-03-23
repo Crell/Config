@@ -42,11 +42,9 @@ readonly class ConfigLoader
     private function integrateLayer(array $data, array $layer): array
     {
         foreach ($layer as $k => $v) {
-            if (isset($data[$k]) && is_array($data[$k])) {
-                $data[$k] = $this->integrateLayer($data[$k], $v);
-            } else {
-                $data[$k] = $v;
-            }
+            $data[$k] = isset($data[$k]) && is_array($data[$k])
+                ? $this->integrateLayer($data[$k], $v)
+                : $v;
         }
         return $data;
     }
