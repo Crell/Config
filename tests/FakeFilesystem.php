@@ -23,6 +23,7 @@ trait FakeFilesystem
     protected function getStructure(): array
     {
         return [
+            'cache' => [],
             'data' => [
                 'empty' => [],
                 'php' => [
