@@ -1,5 +1,6 @@
 {
     "name": "crell/config",
+    "description": "A fast, type-driven configuration loading system for any PHP project.",
     "require": {
         "php": "~8.2",
         "crell/fp": "^0.4.0",
