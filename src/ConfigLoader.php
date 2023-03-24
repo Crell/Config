@@ -39,6 +39,17 @@ readonly class ConfigLoader
         return $this->serde->deserialize($data, from: 'array', to: $class);
     }
 
+    /**
+     * Reducing function to fold layers together.
+     *
+     * The types here are a lie.  Numeric keys will not work.
+     * But array_reduce() says int|string, so PHPStan insists
+     * we do here as well.
+     *
+     * @param array<int|string, mixed> $data
+     * @param array<int|string, mixed> $layer
+     * @return array<int|string, mixed>
+     */
     private function integrateLayer(array $data, array $layer): array
     {
         foreach ($layer as $k => $v) {
