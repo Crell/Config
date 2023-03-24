@@ -35,7 +35,7 @@ $loader = new LayeredLoader([
   new YamlFileSource('./config/' . APP_ENV),
 ]);
 
-$editorConfig = $loader->load(DbSettings::class);
+$editorConfig = $loader->load(EditorSettings::class);
 ```
 
 Given these files on disk:
