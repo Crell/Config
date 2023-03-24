@@ -23,7 +23,7 @@ class ConfigTest extends TestCase
     #[Test]
     public function real_sources_load_and_mask(): void
     {
-        $loader = new ConfigLoader([
+        $loader = new LayeredLoader([
             new YamlFileSource($this->root->getChild('data/base')->url()),
             new YamlFileSource($this->root->getChild('data/dev')->url()),
         ]);
@@ -39,7 +39,7 @@ class ConfigTest extends TestCase
     #[Test]
     public function nested_sources_load_and_mask_top_level_data(): void
     {
-        $loader = new ConfigLoader([
+        $loader = new LayeredLoader([
             new YamlFileSource($this->root->getChild('data/base')->url()),
             new YamlFileSource($this->root->getChild('data/dev')->url()),
         ]);
@@ -61,7 +61,7 @@ class ConfigTest extends TestCase
     #[Test]
     public function custom_keys_are_loaded_successfully(): void
     {
-        $loader = new ConfigLoader([
+        $loader = new LayeredLoader([
             new YamlFileSource($this->root->getChild('data/base')->url()),
             new YamlFileSource($this->root->getChild('data/dev')->url()),
         ]);

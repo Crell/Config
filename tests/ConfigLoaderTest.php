@@ -20,7 +20,7 @@ class ConfigLoaderTest extends TestCase
             }
         };
 
-        $loader = new ConfigLoader([$source]);
+        $loader = new LayeredLoader([$source]);
 
         $config = $loader->load(Sample::class);
 
@@ -54,7 +54,7 @@ class ConfigLoaderTest extends TestCase
             }
         };
 
-        $loader = new ConfigLoader([$source1, $source2, $source3]);
+        $loader = new LayeredLoader([$source1, $source2, $source3]);
 
         $config = $loader->load(Sample::class);
 
@@ -88,7 +88,7 @@ class ConfigLoaderTest extends TestCase
             }
         };
 
-        $loader = new ConfigLoader([$source1, $source2, $source3]);
+        $loader = new LayeredLoader([$source1, $source2, $source3]);
 
         $config = $loader->load(Sample::class);
 
