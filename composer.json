@@ -1,6 +1,19 @@
 {
     "name": "crell/config",
     "description": "A fast, type-driven configuration loading system for any PHP project.",
+    "license": "LGPL-3.0-or-later",
+    "keywords": [
+        "Configuration"
+    ],
+    "homepage": "https://github.com/Crell/Config",
+    "authors": [
+        {
+            "name": "Larry Garfield",
+            "email": "larry@garfieldtech.com",
+            "homepage": "http://www.garfieldtech.com/",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "~8.2",
         "crell/fp": "^0.4.0",
