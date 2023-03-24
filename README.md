@@ -166,8 +166,12 @@ For example, in Laravel you could do something like this:
 ```php
 namespace App\Providers;
  
-use App\Environment;
-use Crell\EnvMapper\EnvMapper;
+use Crell\Config\ConfigLoader;
+use Crell\Config\LayeredLoader;
+use Crell\Config\PhpFileSource;
+use Crell\Config\SerializedFilesystemCache;
+use Crell\Serde\Serde;
+use Crell\Serde\SerdeCommon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
  
