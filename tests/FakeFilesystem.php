@@ -84,6 +84,30 @@ trait FakeFilesystem
                         stuff: foo
                         END,
                 ],
+                'dashboard' => [
+                    'user' => [
+                        'dashboard.yaml' => <<<END
+                            name: "User dashboard"
+                            me:
+                                type: 'user_status'
+                            movie_talk:
+                                type: 'latest_posts'
+                                category: movies
+                            music_talk:
+                                type: 'latest_posts'
+                                category: music
+                                side: right
+                            END,
+                    ],
+                    'admin' => [
+                        'dashboard.yaml' => <<<END
+                            name: "Admin dashboard"
+                            mod_todo:
+                                type: 'pending'
+                                side: right
+                            END,
+                    ],
+                ],
             ],
         ];
     }
