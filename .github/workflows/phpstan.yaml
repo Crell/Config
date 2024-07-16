@@ -6,7 +6,7 @@ on:
 
 jobs:
     phpstan:
-        name: PHPUnit tests on ${{ matrix.php }} ${{ matrix.composer-flags }}
+        name: PHPStan tests on ${{ matrix.php }} ${{ matrix.composer-flags }}
         runs-on: ubuntu-latest
         strategy:
             matrix:
