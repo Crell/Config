@@ -13,6 +13,9 @@ use Crell\Serde\KeyType;
 #[Config('dashboard')]
 class Dashboard
 {
+    /**
+     * @param array<string, LatestPosts|UserStatus|PostsNeedModeration> $components
+     */
     public function __construct(
         public string $name,
         #[Field(flatten: true)]
