@@ -17,6 +17,11 @@ Because each config object is its own class, it integrates seamlessly with a Dep
 
 Let's see an example.
 
+<details>
+<summary>YAML config example</summary>
+
+_Note: To use YAML config files, you need to have [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) installed._
+
 ```php
 use Crell\Config\LayeredLoader;
 use Crell\Config\YamlFileSource;
@@ -50,6 +55,51 @@ bgcolor: "#ffffff"
 # config/dev/editorsettings.yaml
 bgcolor: '#eeff00'
 ```
+
+</details>
+
+<details>
+<summary>JSON config example</summary>
+
+```php
+use Crell\Config\LayeredLoader;
+use Crell\Config\JsonFileSource;
+
+class EditorSettings
+{
+    public function __construct(
+        public readonly string $color,
+        public readonly string $bgcolor,
+        public readonly int $fontSize = 14,
+    ) {}
+}
+
+$loader = new LayeredLoader([
+  new JsonFileSource('./config/common'),
+  new JsonFileSource('./config/' . APP_ENV),
+]);
+
+$editorConfig = $loader->load(EditorSettings::class);
+```
+
+Given these files on disk:
+
+`config/common/editorsettings.json`:
+```json
+{
+    "color": "#ccddee",
+    "bgcolor": "#ffffff"
+}
+```
+
+`config/dev/editorsettings.json`:
+```json
+{
+  "bgcolor": "#eeff00"
+}
+```
+
+</details>
 
 Now, when this code is run, `$editorConfig` will have a color of `#ccddee`, a bgcolor of `#ffffff`, and a fontSize of `14` (because a default is provided).  If, however, it is run in a `dev` environment (`APP_ENV` is `dev`), then the bgcolor will be `#eeff00`.
 
@@ -102,6 +152,11 @@ Note: Make certain the directory where the file cache is stored is not publicly 
 
 Example:
 
+<details>
+<summary>YAML config example</summary>
+
+_Note: To use YAML config files, you need to have [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) installed._
+
 ```php
 use Crell\Config\LayeredLoader;
 use Crell\Config\YamlFileSource;
@@ -116,6 +171,27 @@ $cachedLoader = new SerializedFilesytemCache($loader, '/path/to/cache/dir');
 
 $cachedLoader->load(EditorSettings::class);
 ```
+</details>
+
+<details>
+<summary>JSON config example</summary>
+
+```php
+use Crell\Config\LayeredLoader;
+use Crell\Config\JsonFileSource;
+use Crell\Config\SerializedFilesystemCache;
+
+$loader = new LayeredLoader([
+  new JsonFileSource('./config/common'),
+  new JsonFileSource('./config/' . APP_ENV),
+]);
+
+$cachedLoader = new SerializedFilesytemCache($loader, '/path/to/cache/dir');
+
+$cachedLoader->load(EditorSettings::class);
+```
+</details>
+
 
 ## Dependency Injection
 
