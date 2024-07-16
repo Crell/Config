@@ -60,7 +60,7 @@ You can and should define as many different config objects as you'd like.  They 
 ## Source types
 
 There are several file formats supported out of the box, including `JsonFileSource`, `YamlFileSource`, `PhpFileSource`, and even `IniFileSource` (because why not?).  
-Note: In order to use the `YamlFileSource` you need to have the [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) installed. 
+Note: In order to use the `YamlFileSource` you need to have the [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) package installed. 
 
 Writing other sources is simple, as the `ConfigSource`interface has only a single method.  
 
