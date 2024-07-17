@@ -17,7 +17,7 @@ Because each config object is its own class, it integrates seamlessly with a Dep
 
 Let's see an example.
 
-<details>
+<details open>
 <summary>YAML config example</summary>
 
 _Note: To use YAML config files, you need to have [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) installed._
@@ -157,7 +157,7 @@ Note: Make certain the directory where the file cache is stored is not publicly 
 
 Example:
 
-<details>
+<details open>
 <summary>YAML config example</summary>
 
 _Note: To use YAML config files, you need to have [`symfony/yaml`](https://packagist.org/packages/symfony/yaml) installed._
