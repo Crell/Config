@@ -5,3 +5,10 @@ build
 composer.lock
 .phpunit.cache
 cache
+
+# IntelliJ files
+.idea
+.iml
+
+# Docker
+tmp
